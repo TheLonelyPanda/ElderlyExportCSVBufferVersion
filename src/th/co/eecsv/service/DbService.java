@@ -817,7 +817,165 @@ public class DbService {
 		return output;
 	}
 	
+	public String psychiatricDisorders(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and c.diagcode like 'F%' "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
 	
+	public String mentalDisease(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and c.diagcode like 'G%' "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
+	
+	public String eyeDisease(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and (c.diagcode like 'H1%' "
+					+ "or c.diagcode like 'H2%' "
+					+ "or c.diagcode like 'H3%' "
+					+ "or c.diagcode like 'H4%' "
+					+ "or c.diagcode like 'H5%') "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
+	
+	public String musculoskeletalDisease(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and c.diagcode like 'M%' "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
+	
+	public String injury(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and (c.diagcode like 'S%' or c.diagcode like 'T%') "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
+	
+	public String externalCause(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM diagnosis_opd c "
+					+ "where TO_DATE(c.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and (c.diagcode like 'V%' or c.diagcode like 'Y%') "
+					+ "and c.personal_code = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
 
 	private String checkNullAndReplace(String input) {
 		if (input == null || "".equals(input) || "null".equals(input)|| "[NULL]".equals(input)) {

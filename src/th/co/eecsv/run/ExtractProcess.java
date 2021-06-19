@@ -74,7 +74,8 @@ public class ExtractProcess {
 							+ "drug_opd_count,drug_count,smoke,alcohol,rehabilitation_count,service_count,community_service_count,specialpp_count,"
 							+ "chronic_count_3,chronic_count_6,chronic_count_all,diagnosis_opd_count_3,diagnosis_opd_count_6,"
 							+ "drug_opd_count_3,drug_opd_count_6,special_pp_count_3,special_pp_count_6,special_pp_adl,special_pp_fall,"
-							+ "special_pp_eye,section4_grade,Area Name,Age Range"+ "\n"));
+							+ "special_pp_eye,section4_grade,Area Name,Age Range,psychiatric_disorders,mental_disease,"
+							+ "eye_disease,musculoskeletal_disease,injury,external_cause"+ "\n"));
 			
 			System.out.println("SYSYEM :: Buffer");
 			System.out.println("SYSYEM :: Header ADD!");
@@ -304,6 +305,13 @@ public class ExtractProcess {
 				String section4_grade = calSection4Grade(section4_score);
 				String area_name_lable = changeAreaName(elderData.getAreaId());
 				String age_range_lable = changeAgeRange(age_range);
+				
+				String psychiatric_disorders = dbService.psychiatricDisorders(elderData.getMappingCode());
+				String mental_disease = dbService.mentalDisease(elderData.getMappingCode());
+				String eye_disease = dbService.eyeDisease(elderData.getMappingCode());
+				String musculoskeletal_disease = dbService.musculoskeletalDisease(elderData.getMappingCode());
+				String injury = dbService.injury(elderData.getMappingCode());
+				String external_cause = dbService.externalCause(elderData.getMappingCode());
 				
 				
 				//Section Head
@@ -983,6 +991,19 @@ public class ExtractProcess {
 				sectionAddOn.append(area_name_lable); 
 				sectionAddOn.append(","); 
 				sectionAddOn.append(age_range_lable);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(psychiatric_disorders);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(mental_disease);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(eye_disease);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(musculoskeletal_disease);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(injury);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(external_cause);
+				
 				
 				writer.append(getUniCode(replaceForInput(elderData.getCodeId()) + ","
 						+ replaceForInput(elderData.getMappingCode()) + "," + replaceForInput(elderData.getAreaId())
@@ -2051,6 +2072,8 @@ public class ExtractProcess {
 				score = "1";
 			}else if("1B1258".equals(input)) {
 				score = "1";
+			}else{
+				score = "2";
 			}
 			return score;
 		} catch (Exception e) {
