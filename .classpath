@@ -6,12 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/WFHLib/java-common-tools-1.0.jar">
+	<classpathentry kind="lib" path="lib/java-common-tools-1.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/WFHLib/postgresql-42.2.20.jar">
+	<classpathentry kind="lib" path="lib/postgresql-42.2.20.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
