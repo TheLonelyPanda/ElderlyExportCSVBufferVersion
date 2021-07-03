@@ -976,6 +976,34 @@ public class DbService {
 		}
 		return output;
 	}
+	
+	public String drugOpdDisease6(String mappingCode,String disease ) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String output = "0";
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM drug_opd d , drug_cate g "
+					+ "where TO_DATE(d.date_serv ,'YYYYMMDD') between to_date('20200701','YYYYMMDD') "
+					+ "and to_date('20210104','YYYYMMDD') "
+					+ "and d.didstd = g.drug_code "
+					+ "and d.personal_code = ? "
+					+ "and g.drug_group = ?");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			pst.setString(2, disease);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
 
 	private String checkNullAndReplace(String input) {
 		if (input == null || "".equals(input) || "null".equals(input)|| "[NULL]".equals(input)) {

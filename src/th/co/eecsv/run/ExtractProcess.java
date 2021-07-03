@@ -75,7 +75,10 @@ public class ExtractProcess {
 							+ "chronic_count_3,chronic_count_6,chronic_count_all,diagnosis_opd_count_3,diagnosis_opd_count_6,"
 							+ "drug_opd_count_3,drug_opd_count_6,special_pp_count_3,special_pp_count_6,special_pp_adl,special_pp_fall,"
 							+ "special_pp_eye,section4_grade,Area Name,Age Range,psychiatric_disorders,mental_disease,"
-							+ "eye_disease,musculoskeletal_disease,injury,external_cause"+ "\n"));
+							+ "eye_disease,musculoskeletal_disease,injury,external_cause,disease_detail_13,disease_detail_14,disease_detail_15,"
+							+ "disease_detail_16,disease_top_3,drug_opd_analgesics_6,drug_opd_hypertension_6,drug_opd_GI_6,drug_opd_decrese_cholesterol_6,"
+							+ "drug_opd_anti_histamine_6,drug_opd_herb_6,drug_opd_eyes_ears_6,drug_opd_insulin_6,drug_opd_nauseaandvertigo_6,"
+							+ "drug_opd_minerals_6,drug_opd_cough_medicine_6,drug_opd_psychoses_6,section4_grade_label,gender_label,career_flag_label"+ "\n"));
 			
 			System.out.println("SYSYEM :: Buffer");
 			System.out.println("SYSYEM :: Header ADD!");
@@ -312,6 +315,29 @@ public class ExtractProcess {
 				String musculoskeletal_disease = dbService.musculoskeletalDisease(elderData.getMappingCode());
 				String injury = dbService.injury(elderData.getMappingCode());
 				String external_cause = dbService.externalCause(elderData.getMappingCode());
+				
+				String disease_detail_13 = findDiseaseOth(elderData.getDiseaseOth(),"ไขมัน");
+				String disease_detail_14 = findDiseaseOth(elderData.getDiseaseOth(),"ไทรอย");
+				String disease_detail_15 = findDiseaseOth(elderData.getDiseaseOth(),"ไต");
+				String disease_detail_16 = findDiseaseOth(elderData.getDiseaseOth(),"กระเพาะ");
+				String disease_top_3 = seeTop3(disease_detail_1,disease_detail_2,disease_detail_3);
+				
+				String drug_opd_analgesics_6= dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาแก้อักเสบ");
+				String drug_opd_hypertension_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาความดันโลหิตสูง11");
+				String drug_opd_GI_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยารักษาระบบทางเดินอาหาร");
+				String drug_opd_decrese_cholesterol_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาลดไขมัน");
+				String drug_opd_anti_histamine_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาแก้แพ้11");
+				String drug_opd_herb_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาสมุนไพร");
+				String drug_opd_eyes_ears_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาหยอดตาและหู");
+				String drug_opd_insulin_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาเบาหวาน11");
+				String drug_opd_nauseaandvertigo_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาแก้คลื่นไส้ อาเจียน11");
+				String drug_opd_minerals_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"วิตามิน");
+				String drug_opd_cough_medicine_6 = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาแก้ไอ");
+				String drug_opd_psychoses_6  = dbService.drugOpdDisease6(elderData.getMappingCode(),"ยาจิตเวช11");
+				
+				String section4_grade_label = section4GradeToLable(section4_grade);
+				String gender_label = genderToLable(elderData.getGender());
+				String career_flag_label = careerToLable(elderData.getCareerFlag());
 				
 				
 				//Section Head
@@ -1003,6 +1029,46 @@ public class ExtractProcess {
 				sectionAddOn.append(injury);
 				sectionAddOn.append(","); 
 				sectionAddOn.append(external_cause);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(disease_detail_13);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(disease_detail_14);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(disease_detail_15);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(disease_detail_16);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(disease_top_3);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_analgesics_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_hypertension_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_GI_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_decrese_cholesterol_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_anti_histamine_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_herb_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_eyes_ears_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_insulin_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_nauseaandvertigo_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_minerals_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_cough_medicine_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(drug_opd_psychoses_6);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(section4_grade_label);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(gender_label);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(career_flag_label);
 				
 				
 				writer.append(getUniCode(replaceForInput(elderData.getCodeId()) + ","
@@ -2112,6 +2178,77 @@ public class ExtractProcess {
 				lable = ">70";
 			}else if("0".equals(input)) {
 				lable = "0";
+			}
+			return lable;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return lable;
+		}
+	}
+	
+	private String findDiseaseOth(String input , String word) {
+		String score = "0";
+		try {
+			if (input.indexOf(word)  != -1){
+				score = "1";
+			}
+			return score;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return score;
+		}
+	}
+	
+	private String seeTop3(String input1 , String input2 , String input3) {
+		String score = "0";
+		try {
+			if (input1.equals("1") && input2.equals("1") && input3.equals("1")){
+				score = "1";
+			}
+			return score;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return score;
+		}
+	}
+	
+	private String section4GradeToLable(String section4_grade) {
+		String lable = "";
+		try {
+			if ("1".equals(section4_grade)){
+				lable = "มีปัญหาในการทำงาน";
+			}else if ("2".equals(section4_grade)){
+				lable = "สามารถทำงานได้ปานกลาง";
+			}else if ("3".equals(section4_grade)){
+				lable = "สามารถทำงานได้ดี";
+			}
+			return lable;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return lable;
+		}
+	}
+	private String genderToLable(String gender) {
+		String lable = "";
+		try {
+			if ("0".equals(gender)){
+				lable = "ชาย";
+			}else if ("1".equals(gender)){
+				lable = "หญิง";
+			}
+			return lable;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return lable;
+		}
+	}
+	private String careerToLable(String careerFlag) {
+		String lable = "";
+		try {
+			if ("1".equals(careerFlag)){
+				lable = "ประกอบอาชีพ";
+			}else if ("2".equals(careerFlag)){
+				lable = "ไม่ได้ประกอบอาชีพ";
 			}
 			return lable;
 		} catch (Exception e) {
