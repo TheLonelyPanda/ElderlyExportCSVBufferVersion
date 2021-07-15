@@ -29,7 +29,7 @@ public class ExtractProcess {
 			ArrayList<MasterElderlyPerson> elderlylist = dbService.getElderlyPerson();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
 			Date date = new Date(System.currentTimeMillis());
-			String fileName = "E:\\aging\\Elderly_" + formatter.format(date) + ".csv";
+			String fileName = "E:\\aging\\csv\\Elderly_" + formatter.format(date) + ".csv";
 			File file = new File(fileName);
 			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "tis620"));
 			writer.append(
@@ -78,7 +78,8 @@ public class ExtractProcess {
 							+ "eye_disease,musculoskeletal_disease,injury,external_cause,disease_detail_13,disease_detail_14,disease_detail_15,"
 							+ "disease_detail_16,disease_top_3,drug_opd_analgesics_6,drug_opd_hypertension_6,drug_opd_GI_6,drug_opd_decrese_cholesterol_6,"
 							+ "drug_opd_anti_histamine_6,drug_opd_herb_6,drug_opd_eyes_ears_6,drug_opd_insulin_6,drug_opd_nauseaandvertigo_6,"
-							+ "drug_opd_minerals_6,drug_opd_cough_medicine_6,drug_opd_psychoses_6,section4_grade_label,gender_label,career_flag_label"+ "\n"));
+							+ "drug_opd_minerals_6,drug_opd_cough_medicine_6,drug_opd_psychoses_6,section4_grade_label,gender_label,career_flag_label,"
+							+ "can_run_flag"+ "\n"));
 			
 			System.out.println("SYSYEM :: Buffer");
 			System.out.println("SYSYEM :: Header ADD!");
@@ -338,6 +339,8 @@ public class ExtractProcess {
 				String section4_grade_label = section4GradeToLable(section4_grade);
 				String gender_label = genderToLable(elderData.getGender());
 				String career_flag_label = careerToLable(elderData.getCareerFlag());
+				
+				String can_run_flag = calCanRun(elderData.getCanRun());
 				
 				
 				//Section Head
@@ -1069,6 +1072,8 @@ public class ExtractProcess {
 				sectionAddOn.append(gender_label);
 				sectionAddOn.append(","); 
 				sectionAddOn.append(career_flag_label);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(can_run_flag);
 				
 				
 				writer.append(getUniCode(replaceForInput(elderData.getCodeId()) + ","
@@ -2256,5 +2261,22 @@ public class ExtractProcess {
 			return lable;
 		}
 	}
+	
+	private String calCanRun(String canRun) {
+		String lable = "0";
+		try {
+			if ("2".equals(canRun)){
+				lable = "1";
+			}else if ("1".equals(canRun)){
+				lable = "0";
+			}
+			return lable;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return lable;
+		}
+	}
+	
+
 
 }
