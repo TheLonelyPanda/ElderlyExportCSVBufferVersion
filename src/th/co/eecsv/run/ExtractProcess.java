@@ -2236,9 +2236,9 @@ public class ExtractProcess {
 	private String genderToLable(String gender) {
 		String lable = "";
 		try {
-			if ("0".equals(gender)){
+			if ("1".equals(gender)){
 				lable = "ชาย";
-			}else if ("1".equals(gender)){
+			}else if ("0".equals(gender)){
 				lable = "หญิง";
 			}
 			return lable;
