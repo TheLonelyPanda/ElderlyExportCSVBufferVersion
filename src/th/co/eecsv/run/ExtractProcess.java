@@ -1862,15 +1862,17 @@ public class ExtractProcess {
 			String smoke = dbService.queryTableSmoke(mappingCode);
 			if("1".equals(smoke)) {
 				score = "0";
-			}else if ("2".equals(smoke) || "3".equals(smoke) || "4".equals(smoke)) {
+			}else if ("2".equals(smoke) || "3".equals(smoke)) {
 				score = "1";
+			}else if ("4".equals(smoke)) {
+				score = "2";
 			}else {
-				score = "9";
+				score = "0";
 			}
 			return score;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return score = "9";
+			return score = "0";
 		}
 	}
 	
@@ -1880,15 +1882,17 @@ public class ExtractProcess {
 			String alcohol = dbService.queryTableAlcohol(mappingCode);
 			if("1".equals(alcohol)) {
 				score = "0";
-			}else if ("2".equals(alcohol) || "3".equals(alcohol) || "4".equals(alcohol)) {
+			}else if ("2".equals(alcohol) || "3".equals(alcohol)) {
 				score = "1";
-			}else {
-				score = "9";
+			}else if ("4".equals(alcohol)) {
+				score = "2";
+			}else{
+				score = "0";
 			}
 			return score;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return score = "9";
+			return score = "0";
 		}
 	}
 	
@@ -2072,11 +2076,11 @@ public class ExtractProcess {
 		String score = "0";
 		try {
 			int cal = Integer.parseInt(input);
-			if (cal >= 0 && cal <= 24) {
+			if (cal >= 7 && cal <= 27) {
 				score = "1";
-			} else if (cal >= 25 && cal <= 39) {
+			} else if (cal >= 28 && cal <= 43) {
 				score = "2";
-			} else if (cal >= 40) {
+			} else if (cal >= 44) {
 				score = "3";
 			} else {
 				score = "0";
