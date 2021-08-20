@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import th.co.eecsv.entity.MasterElderlyPerson;
 
@@ -995,6 +996,37 @@ public class DbService {
 			rs = pst.executeQuery();
 			if (rs.next()) {
 				output = "1";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeStatement(pst, rs, null);
+		}
+		return output;
+	}
+	
+	public HashMap<String, String> queryOccupation(String mappingCode) {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		HashMap<String, String> output = new HashMap<String, String>();
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append("select p.occupation_new occupation_id , o.description occupation_name, p.d_update occupation_updatedate ");
+			sql.append("from  person p, occupation o ");
+			sql.append("where p.occupation_new = o.oc_id and p.personal_code = ? ");
+			sql.append("order by p.d_update desc");
+			pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, mappingCode);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				output.put("occupation_id",rs.getString("occupation_id"));
+				output.put("occupation_name",rs.getString("occupation_name"));
+				output.put("occupation_updatedate",rs.getString("occupation_updatedate"));
+			}else {
+				output.put("occupation_id","");
+				output.put("occupation_name","");
+				output.put("occupation_updatedate","");
 			}
 
 		} catch (Exception e) {

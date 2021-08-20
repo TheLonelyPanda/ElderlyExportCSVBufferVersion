@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.java.at.common.utils.ThaiUtil;
 
@@ -79,7 +80,7 @@ public class ExtractProcess {
 							+ "disease_detail_16,disease_top_3,drug_opd_analgesics_6,drug_opd_hypertension_6,drug_opd_GI_6,drug_opd_decrese_cholesterol_6,"
 							+ "drug_opd_anti_histamine_6,drug_opd_herb_6,drug_opd_eyes_ears_6,drug_opd_insulin_6,drug_opd_nauseaandvertigo_6,"
 							+ "drug_opd_minerals_6,drug_opd_cough_medicine_6,drug_opd_psychoses_6,section4_grade_label,gender_label,career_flag_label,"
-							+ "can_run_flag"+ "\n"));
+							+ "can_run_flag,occupation_id,occupation_name,occupation_updatedate"+ "\n"));
 			
 			System.out.println("SYSYEM :: Buffer");
 			System.out.println("SYSYEM :: Header ADD!");
@@ -341,6 +342,11 @@ public class ExtractProcess {
 				String career_flag_label = careerToLable(elderData.getCareerFlag());
 				
 				String can_run_flag = calCanRun(elderData.getCanRun());
+				
+				HashMap<String, String> output = dbService.queryOccupation(elderData.getMappingCode());
+				String occupation_id = output.get("occupation_id");
+				String occupation_name = output.get("occupation_name");
+				String occupation_updatedate = output.get("occupation_updatedate");
 				
 				
 				//Section Head
@@ -1074,6 +1080,12 @@ public class ExtractProcess {
 				sectionAddOn.append(career_flag_label);
 				sectionAddOn.append(","); 
 				sectionAddOn.append(can_run_flag);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(occupation_id);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(occupation_name);
+				sectionAddOn.append(","); 
+				sectionAddOn.append(occupation_updatedate);
 				
 				
 				writer.append(getUniCode(replaceForInput(elderData.getCodeId()) + ","
