@@ -53,7 +53,8 @@ public class ExtractProcess {
 							+ "work_think,work_effect,work_leave,work_2yrs,feel_fun,feel_active,feel_hope,disease,disease_detail,disease_detail_1,"
 							+ "disease_detail_2,disease_detail_3,disease_detail_4,disease_detail_5,disease_detail_6,disease_detail_7,disease_detail_8,"
 							+ "disease_detail_9,disease_detail_10,disease_detail_11,disease_detail_12,disease_oth,section4_score,section4_group,"
-							+ "career_need,career_need_oth,career_need_reason,trade_wash,trade_slices,trade_fried,trade_open,trade_reach,"
+							+ "career_need,career_need_1,career_need_2,career_need_3,career_need_4,career_need_5,career_need_6,career_need_oth,career_need_reason,"
+							+ "trade_wash,trade_slices,trade_fried,trade_open,trade_reach,"
 							+ "trade_raise,trade_carry,trade_drive,trade_motorcise,trade_sit,trade_heavy,trade_wall,trade_cal,trade_mobile,"
 							+ "trade_app,trade_sum,farm_prepare,farm_hand,farm_machine,farm_knife,farm_back,farm_water,farm_proan,farm_wan,farm_injection,"
 							+ "farm_keep,farm_tool,farm_pack,farm_drive,farm_motorcise,farm_cal,farm_mobile,farm_6hrm,farm_sum,rubber_knife,rubber_walk,"
@@ -148,6 +149,14 @@ public class ExtractProcess {
 				String disease_detail_10 = spitDiseaseDetail(elderData.getDiseaseDetail(),"10");
 				String disease_detail_11 = spitDiseaseDetail(elderData.getDiseaseDetail(),"11");
 				String disease_detail_12 = spitDiseaseDetail(elderData.getDiseaseDetail(),"12");
+				
+				String career_need_1 = spitDiseaseDetail(elderData.getCareerNeed(),"1");
+				String career_need_2 = spitDiseaseDetail(elderData.getCareerNeed(),"2");
+				String career_need_3 = spitDiseaseDetail(elderData.getCareerNeed(),"3");
+				String career_need_4 = spitDiseaseDetail(elderData.getCareerNeed(),"4");
+				String career_need_5 = spitDiseaseDetail(elderData.getCareerNeed(),"5");
+				String career_need_6 = spitDiseaseDetail(elderData.getCareerNeed(),"6");
+
 				
 				String pain_score = String.valueOf(findScore(elderData.getPainNeck())+findScore(elderData.getPainShoulder())
 									+findScore(elderData.getPainScapula())+findScore(elderData.getPainElbow())
@@ -705,6 +714,18 @@ public class ExtractProcess {
 
 				//Section5
 				section5.append(replaceForInput(elderData.getCareerNeed()));
+				section5.append(",");
+				section5.append(career_need_1);
+				section5.append(",");
+				section5.append(career_need_2);
+				section5.append(",");
+				section5.append(career_need_3);
+				section5.append(",");
+				section5.append(career_need_4);
+				section5.append(",");
+				section5.append(career_need_5);
+				section5.append(",");
+				section5.append(career_need_6);
 				section5.append(",");
 				section5.append(replaceForInput(elderData.getCareerNeedOth())); 
 				section5.append(",");
