@@ -28,9 +28,7 @@ public class ExtractProcess {
 			conn = db.getConnectionOra();
 			DbService dbService = new DbService(conn);
 			ArrayList<MasterElderlyPerson> elderlylist = dbService.getElderlyPerson();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
-			Date date = new Date(System.currentTimeMillis());
-			String fileName = "E:\\aging\\csv\\Elderly_" + formatter.format(date) + ".csv";
+			String fileName = "./csv/Elderly_Data.csv";
 			File file = new File(fileName);
 			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "tis620"));
 			writer.append(
